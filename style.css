@@ -1,130 +1,168 @@
-/* ===== Base ===== */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
+/* === Scene Base === */
+* { box-sizing: border-box; margin:0; padding:0;}
+html, body { height:100%; }
+body {
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:radial-gradient(circle at 10% 10%,#ffd1f4 0%,#e8c2ff 30%,#9b6bff 100%);
-  font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  align-items:center;
+  background: radial-gradient(circle at 10% 10%, #ffd1f4 0%, #e8c2ff 30%, #9b6bff 100%);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
 }
 
-/* ===== Scene & Bottle ===== */
-.scene{width:360px;height:640px;position:relative}
+.scene { width:360px; height:640px; position:relative; }
 
-.bottle{
-  width:150px;height:260px;
+/* === Bottle === */
+.bottle {
+  width:150px;
+  height:260px;
   margin:160px auto 0;
   position:relative;
-  border-radius:40px 40px 30px 30px/50px 50px 20px 20px;
-  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
-  border:2px solid rgba(255,255,255,.12);
-  box-shadow:0 8px 30px rgba(88,0,120,.25),inset 0 -12px 40px rgba(255,255,255,.02);
-  display:flex;align-items:flex-end;justify-content:center;
+  border-radius:40px 40px 30px 30px / 50px 50px 20px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border:2px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 30px rgba(88,0,120,0.25);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
 }
 
-.liquid{
-  width:120px;height:120px;margin-bottom:24px;
+.liquid {
+  width:120px;
+  height:120px;
+  margin-bottom:24px;
   border-radius:18px;
-  background:linear-gradient(180deg,#ff9bd6 0%,#d185ff 60%);
-  box-shadow:0 6px 18px rgba(155,70,200,.25),inset 0 6px 18px rgba(255,255,255,.12);
+  background: linear-gradient(180deg,#ff9bd6 0%,#d185ff 60%);
+  box-shadow: inset 0 6px 18px rgba(255,255,255,0.12);
 }
 
-.cork{
-  position:absolute;top:-18px;left:50%;transform:translateX(-50%);
-  width:70px;height:24px;
-  background:linear-gradient(180deg,#ffe7ff,#ffd6fa);
-  border-radius:6px;border:2px solid rgba(0,0,0,.06);
-  box-shadow:0 4px 10px rgba(0,0,0,.12);
-}
-
-/* ===== Hearts ===== */
-.hearts{
+.cork {
   position:absolute;
+  top:-18px;
   left:50%;
-  bottom:120px;           /* start from top of the liquid */
-  transform:translateX(-50%);
-  pointer-events:none;
+  transform: translateX(-50%);
+  width:70px;
+  height:24px;
+  background: linear-gradient(180deg,#ffe7ff,#ffd6fa);
+  border-radius:6px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.12);
+  z-index:5;
 }
 
+/* === Heart Shape === */
 .heart{
-    width:28px;height:28px;
-    position:absolute;left:0;bottom:0;
-    transform-origin:center;
-    background:linear-gradient(180deg,#ff6fbf,#b36bff);
-    border-radius:4px;
-    box-shadow:0 6px 18px rgba(155,70,200,.22),0 2px 6px rgba(0,0,0,.08);
-    transform:translate(-50%,0) rotate(-45deg) scale(.9);
-    will-change:transform,opacity;
-  }
-  
-  /* lobes */
-  .heart::before,.heart::after{
-      content:"";
-      position:absolute;width:28px;height:28px;
-      background:inherit;border-radius:50%;
-      top:-50%;left:0;
-    }
-    .heart::after{left:50%;top:0}
-
-/* ===== Animations ===== */
-
-/* upward float + pop */
-@keyframes floatPop{
-  0%{
-    transform:translate(-50%,0) rotate(-45deg) scale(.8);
-    opacity:0;filter:blur(.8px);
-  }
-  10%{
-    opacity:1;filter:blur(0);
-  }
-  65%{
-    transform:translate(-50%,-160px) rotate(-45deg) scale(1);
-    opacity:1;
-  }
-  85%{
-    transform:translate(-50%,-190px) rotate(-45deg) scale(1.3);
-    opacity:.9;
-  }
-  100%{
-    transform:translate(-50%,-200px) rotate(-45deg) scale(0);
-    opacity:0;
-  }
-}
-
-/* gentle horizontal drift for realism */
-@keyframes sway{
-  0%{transform:translate(-50%,0) rotate(-45deg) scale(.9);}
-  50%{transform:translate(calc(-50% - 4px),-10px) rotate(-43deg) scale(1);}
-  100%{transform:translate(-50%,0) rotate(-45deg) scale(.9);}
-}
-
-/* apply both animations, infinite loop */
-.heart{
-  animation:
-    floatPop 4.8s cubic-bezier(.2,.8,.2,1) infinite,
-    sway 4.8s ease-in-out infinite;
-}
-
-/* stagger each heart so they rise one-by-one */
-.heart:nth-child(1){
-  left:-32px;
-  animation-delay:0s,0s;
-}
-.heart:nth-child(2){
+  width:28px;
+  height:28px;
+  position:absolute;
   left:0;
-  animation-delay:1.2s,1.2s;
-}
-.heart:nth-child(3){
-  left:32px;
-  animation-delay:2.4s,2.4s;
+  bottom:60px; /* raised from 120px to 140px */
+  transform-origin:center;
+  background:linear-gradient(180deg,#ff6fbf,#b36bff);
+  border-radius:4px;
+  box-shadow:0 6px 18px rgba(155,70,200,.22),0 2px 6px rgba(0,0,0,.08);
+  transform:translate(-50%,0) rotate(-45deg) scale(.9);
+  will-change:transform,opacity;
 }
 
-/* ===== Responsive tweak ===== */
+/* lobes */
+.heart::before,.heart::after{
+  content:"";
+  position:absolute;
+  width:28px;
+  height:28px;
+  background:inherit;
+  border-radius:50%;
+}
+
+/* left lobe */
+.heart::before{ top:-50%; left:0; }
+/* right lobe */
+.heart::after{ top:0; left:50%; }
+
+/* === Base hearts inside liquid === */
+.hearts .heart:nth-child(1) { left: calc(50% - 30px); animation: floatPop 4s cubic-bezier(0.25,0.8,0.25,1) 0s infinite; }
+.hearts .heart:nth-child(2) { left: 50%; animation: floatPop 4s cubic-bezier(0.25,0.8,0.25,1) 1.2s infinite; }
+.hearts .heart:nth-child(3) { left: calc(50% + 30px); animation: floatPop 4s cubic-bezier(0.25,0.8,0.25,1) 2.4s infinite; }
+
+@keyframes floatPop {
+  0%   { transform: translate(-50%,0) rotate(-45deg) scale(0.8); opacity:0; }
+  10%  { opacity:1; }
+  60%  { transform: translate(-50%,-30px) rotate(-45deg) scale(1); opacity:1; }
+  90%  { transform: translate(-50%,-40px) rotate(-45deg) scale(1.05); opacity:0.8; }
+  100% { transform: translate(-50%,-40px) rotate(-45deg) scale(0); opacity:0; }
+}
+
+/* === Small hearts above cork === */
+.hearts-top {
+  position:absolute;
+  bottom:250px; /* above cork */
+  left:50%;
+  transform: translateX(-50%);
+}
+
+.hearts-top .heart:nth-child(1) { left: calc(50% - 20px); animation: floatPopSmall 5s cubic-bezier(0.25,0.8,0.25,1) 0.6s infinite; }
+.hearts-top .heart:nth-child(2) { left: calc(50% + 20px); animation: floatPopSmall 5s cubic-bezier(0.25,0.8,0.25,1) 2.4s infinite; }
+
+.heart.small{
+  width:20px;
+  height:20px;
+}
+
+.heart.small::before, .heart.small::after{
+  width:20px;
+  height:20px;
+  background:inherit;
+  border-radius:50%;
+}
+
+.heart.small::before{ top:-50%; left:0; }
+.heart.small::after { top:0; left:50%; }
+
+@keyframes floatPopSmall {
+  0%   { transform: translate(-50%,0) rotate(-45deg) scale(0.8); opacity:0; }
+  10%  { opacity:1; }
+  60%  { transform: translate(-50%,-60px) rotate(-45deg) scale(1); opacity:1; }
+  85%  { transform: translate(-50%,-80px) rotate(-45deg) scale(1.05); opacity:0.8; }
+  100% { transform: translate(-50%,-80px) rotate(-45deg) scale(0); opacity:0; }
+}
+
+/* === Special heart === */
+.heart.special{
+  width:36px;
+  height:36px;
+  background: linear-gradient(180deg,#ff66c4,#a76cff);
+  left:50%;
+  bottom:120px; /* special heart starts slightly lower than base hearts */
+  transform: translateX(-50%) rotate(-45deg);
+  animation: floatSpecial 5s ease-in-out 1s infinite;
+  z-index:4;
+}
+
+.heart.special::before,
+.heart.special::after{
+  width:36px;
+  height:36px;
+  background:inherit;
+  border-radius:50%;
+}
+
+.heart.special::before{ top:-50%; left:0; }
+.heart.special::after { top:0; left:50%; }
+
+@keyframes floatSpecial {
+  0%   { transform: translate(-50%,0) rotate(-45deg) scale(1); opacity:0; }
+  10%  { opacity:1; }
+  40%  { transform: translate(-50%,-100px) rotate(-45deg) scale(0.9); opacity:1;} /* cork */
+  60%  { transform: translate(-50%,-140px) rotate(-45deg) scale(0.7); opacity:0.6;} /* above cork */
+  70%  { transform: translate(-50%,-140px) rotate(-45deg) scale(0.5); opacity:0;} /* fade */
+  100% { transform: translate(-50%,-140px) rotate(-45deg) scale(0); opacity:0;}
+}
+
+/* === Responsive tweaks === */
 @media(max-width:380px){
-  .scene{width:320px;height:580px}
-  .bottle{width:140px;height:240px;margin-top:120px}
-  .liquid{width:110px;height:100px;margin-bottom:20px}
-  .heart{width:24px;height:24px}
-  .heart::before,.heart::after{width:24px;height:24px}
+  .scene { width:320px; height:580px;}
+  .bottle { width:140px; height:240px; margin-top:120px;}
+  .liquid { width:110px; height:100px; margin-bottom:20px;}
+  .heart { width:24px; height:24px; }
+  .heart.small { width:18px; height:18px; }
+  .heart.special { width:30px; height:30px; }
 }
