@@ -9,6 +9,8 @@ The project demonstrates creative use of CSS animations, transitions, and keyfra
 ## Demo
 You can see the live demo of the animation here: [Birthday Card Demo](https://daria-ropelato.github.io/Potion_htmml_css)
 
+https://github.com/user-attachments/assets/2093931e-984d-4373-bbe0-45aa5a75b767
+
 ## Tools / Technologies Used
 - **HTML5**: Structure of the card
 - **CSS3**: Styling and animations
