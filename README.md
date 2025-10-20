@@ -25,7 +25,7 @@ This project was designed to:
 ## ✨ Demo
 
 👉 **Live Demo (GitHub Pages):**  
-You can see the live demo of the animation here: [Love Potion Demo](https://daria-ropelato.github.io/Potion_htmml_css)
+You can see the live demo of the animation here: [Love Potion Demo](https://daria-ropelato.github.io/Potion_html_css/)
 
 https://github.com/user-attachments/assets/2093931e-984d-4373-bbe0-45aa5a75b767
 
